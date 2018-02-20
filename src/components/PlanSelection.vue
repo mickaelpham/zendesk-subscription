@@ -5,12 +5,11 @@
     </div>
 
     <div class="plans">
-      <select>
+      <select v-model.number="planId">
         <option
           v-for="plan in plans"
           :key="plan.id"
           :value="plan.id"
-          :selected="plan.id === current.planId"
         >
           {{ plan.name }}
         </option>
@@ -21,14 +20,14 @@
       <input
         class="quantity-field"
         type="number"
-        :value="current.quantity"
+        v-model.number="quantity"
         v-bind:id="quantityLabel"
       >
       <label v-bind:for="quantityLabel">{{ product.unitOfMeasure }}</label>
     </div>
 
     <div class="cost">
-      ${{ current.cost }}
+      ${{ preview.cost }}
     </div>
   </div>
 </template>
@@ -41,9 +40,6 @@ export default {
 
   data () {
     return {
-      selected: null,
-      quantity: null,
-
       plans: [
         { id: 1, name: 'Essential' },
         { id: 2, name: 'Team' },
@@ -59,6 +55,35 @@ export default {
     },
     current () {
       return this.$store.getters.currentPlanForProduct(this.product.id)
+    },
+    preview () {
+      return this.$store.getters.previewedPlanForProduct(this.product.id)
+    },
+    planId: {
+      get () {
+        return this.preview.planId;
+      },
+      set (value) {
+        this.$store.commit('updatePreviewPlanForProduct', {
+          productId: this.product.id,
+          planId: value,
+          quantity: this.quantity
+        })
+        this.$store.dispatch('preview')
+      }
+    },
+    quantity: {
+      get () {
+        return this.preview.quantity;
+      },
+      set (value) {
+        this.$store.commit('updatePreviewPlanForProduct', {
+          productId: this.product.id,
+          planId: this.planId,
+          quantity: value
+        })
+        this.$store.dispatch('preview')
+      }
     }
   }
 }
