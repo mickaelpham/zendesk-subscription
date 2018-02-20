@@ -21,6 +21,10 @@
       >
       <label v-bind:for="quantityLabel">{{ product.unitOfMeasure }}</label>
     </div>
+
+    <div class="cost">
+      $XXX
+    </div>
   </div>
 </template>
 
@@ -34,17 +38,17 @@ export default {
       quantity: null,
 
       plans: [
-        { id: 1, name: 'Basic' },
-        { id: 2, name: 'Good' },
-        { id: 3, name: 'Better' },
-        { id: 4, name: 'Best' }
+        { id: 1, name: 'Essential' },
+        { id: 2, name: 'Team' },
+        { id: 3, name: 'Professional' },
+        { id: 4, name: 'Enterprise' }
       ]
     }
   },
 
   computed: {
     quantityLabel () {
-      return this.product.name + '-quantity'
+      return this.product.name.toLowerCase() + '-quantity'
     }
   }
 }
@@ -54,11 +58,11 @@ export default {
 .plan-selection {
   display: flex;
   justify-content: space-between;
-  vertical-align: center;
+  align-items: center;
   border: 1px solid #ccc;
   padding: 1.5em 2em;
   margin: 2em 1em;
-  max-width: 30em;
+  max-width: 40em;
 }
 
 .plans {
@@ -72,8 +76,12 @@ export default {
 .product-name {
   text-align: right;
   margin-right: 1.5em;
-  line-height: 1.6em;
   width: 5em;
+}
+
+.cost {
+  font-size: 2em;
+  font-weight: 100;
 }
 
 .quantity {

@@ -19,9 +19,9 @@ export default {
   data () {
     return {
       products: [
-        { id: 1, name: 'Support', unitOfMeasure: 'Seats' },
-        { id: 2, name: 'Chat', unitOfMeasure: 'Agents' },
-        { id: 3, name: 'Voice', unitOfMeasure: 'Minutes' }
+        { id: 1, name: 'Support', unitOfMeasure: 'Agents' },
+        { id: 2, name: 'Chat',    unitOfMeasure: 'Agents' },
+        { id: 3, name: 'Voice',   unitOfMeasure: 'Agents' }
       ]
     }
   }
@@ -38,10 +38,14 @@ input,
 select {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 12pt;
+  border: 1px solid #ccc;
+}
+
+input {
+  padding: 3px;
 }
 
 select {
-  border: 1px solid #ccc;
   padding: 2px;
 }
 </style>
