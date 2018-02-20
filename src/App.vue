@@ -1,15 +1,29 @@
 <template>
   <div id="app">
-    <Counter/>
-    <Counter/>
-    <Counter/>
+    <PlanSelection
+      v-for="product in products"
+      v-bind:key="product.id"
+      v-bind:product="product"
+    ></PlanSelection>
   </div>
 </template>
 
 <script>
-import Counter from './components/Counter.vue'
+import PlanSelection from './components/PlanSelection.vue'
 
 export default {
-  components: { Counter }
+  components: {
+    PlanSelection
+  },
+
+  data () {
+    return {
+      products: [
+        { id: 1, name: 'Support' },
+        { id: 2, name: 'Chat' },
+        { id: 3, name: 'Voice' }
+      ]
+    }
+  }
 }
 </script>
