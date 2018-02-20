@@ -5,8 +5,13 @@
     </div>
 
     <div class="plans">
-      <select v-model="selected">
-        <option v-for="plan in plans" :key="plan.id" :value="plan.id">
+      <select>
+        <option
+          v-for="plan in plans"
+          :key="plan.id"
+          :value="plan.id"
+          :selected="plan.id === current.planId"
+        >
           {{ plan.name }}
         </option>
       </select>
@@ -16,19 +21,21 @@
       <input
         class="quantity-field"
         type="number"
-        v-model.number="quantity"
+        :value="current.quantity"
         v-bind:id="quantityLabel"
       >
       <label v-bind:for="quantityLabel">{{ product.unitOfMeasure }}</label>
     </div>
 
     <div class="cost">
-      $XXX
+      ${{ current.cost }}
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: ['product'],
 
@@ -49,6 +56,9 @@ export default {
   computed: {
     quantityLabel () {
       return this.product.name.toLowerCase() + '-quantity'
+    },
+    current () {
+      return this.$store.getters.currentPlanForProduct(this.product.id)
     }
   }
 }
@@ -80,8 +90,10 @@ export default {
 }
 
 .cost {
+  flex: 1;
   font-size: 2em;
   font-weight: 100;
+  text-align: right;
 }
 
 .quantity {
@@ -90,6 +102,8 @@ export default {
 }
 
 .quantity-field {
-  width: 6em;
+  width: 4em;
+  text-align: right;
+  padding-right: 10px;
 }
 </style>

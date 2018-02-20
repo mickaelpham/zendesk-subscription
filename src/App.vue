@@ -19,9 +19,9 @@ export default {
   data () {
     return {
       products: [
-        { id: 1, name: 'Support', unitOfMeasure: 'Agents' },
-        { id: 2, name: 'Chat',    unitOfMeasure: 'Agents' },
-        { id: 3, name: 'Voice',   unitOfMeasure: 'Agents' }
+        { id: 1, name: 'Support', unitOfMeasure: 'Seats' },
+        { id: 2, name: 'Chat',    unitOfMeasure: 'Bots' },
+        { id: 3, name: 'Voice',   unitOfMeasure: 'Lines' }
       ]
     }
   }
@@ -47,5 +47,15 @@ input {
 
 select {
   padding: 2px;
+}
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>
